@@ -2,7 +2,7 @@ using Alerting.Presentation;
 using Microsoft.AspNetCore.Mvc.Testing;
 using RESTFulSense.Clients;
 
-namespace Alerting.AcceptanceTests.Helpers
+namespace Alerting.Tests.AcceptanceTests.Helpers
 {
     public partial class AlertingApiClient
     {

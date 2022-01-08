@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Alerting.AcceptanceTests.Models;
+using Alerting.Tests.AcceptanceTests.Models;
 
-namespace Alerting.AcceptanceTests.Helpers
+namespace Alerting.Tests.AcceptanceTests.Helpers
 {
     public partial class AlertingApiClient
     {

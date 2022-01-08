@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Alerting.AcceptanceTests</RootNamespace>
+    <RootNamespace>Alerting.Tests.AcceptanceTests</RootNamespace>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Presentation\Presentation.csproj" />
+    <ProjectReference Include="..\..\Presentation\Presentation.csproj" />
   </ItemGroup>
 
 </Project>

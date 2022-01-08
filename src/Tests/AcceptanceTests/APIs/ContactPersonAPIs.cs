@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
-using Alerting.AcceptanceTests.Helpers;
-using Alerting.AcceptanceTests.Models;
+using Alerting.Tests.AcceptanceTests.Helpers;
+using Alerting.Tests.AcceptanceTests.Models;
 using FluentAssertions;
 using Xunit;
 
-namespace Alerting.AcceptanceTests.APIs
+namespace Alerting.Tests.AcceptanceTests.APIs
 {
     public class ContactPersonAPIs
     {

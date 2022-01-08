@@ -1,4 +1,4 @@
-namespace Alerting.AcceptanceTests.Models
+namespace Alerting.Tests.AcceptanceTests.Models
 {
     public class ContactPerson
     {
