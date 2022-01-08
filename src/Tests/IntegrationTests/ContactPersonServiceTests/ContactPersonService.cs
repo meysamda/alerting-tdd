@@ -1,4 +1,5 @@
 using System;
+using Alerting.Infrastructure.Data.DbContexts;
 using Xunit;
 
 namespace Alerting.Tests.IntegrationTests.ContactPersonService
