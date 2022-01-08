@@ -17,26 +17,26 @@ namespace Alerting.Tests.AcceptanceTests.APIs
         }
 
         [Fact]
-        public async Task Create_contact_person()
+        public async Task Post_vaild_contact_person()
         {
-            var contactPerson = CreateContactPerson();
+            var contactPerson = CreateValidContactPerson();
 
             var response = await _alertingApiClient.PostContactPersonAsync(contactPerson);
 
             response.Should().BeGreaterThan(0);
         }
 
-        [Fact]
-        public async Task Prevent_creating_invalid_contact_person()
-        {
-            var contactPerson = CreateContactPerson();
+        // [Fact]
+        // public async Task Post_invalid_contact_person()
+        // {
+        //     var contactPerson = CreateInvalidContactPerson();
 
-            var response = await _alertingApiClient.PostContactPersonAsync(contactPerson);
+        //     var response = await _alertingApiClient.PostContactPersonAsync(contactPerson);
 
-            response.Should().BeGreaterThan(0);
-        }
+        //     response.Should().BeOfType(typeof(BadRequestErrorResponse));
+        // }
 
-        private ContactPerson CreateContactPerson()
+        private ContactPerson CreateValidContactPerson()
         {
             return new ContactPerson {
                 FirstName = "meysam",
@@ -45,5 +45,13 @@ namespace Alerting.Tests.AcceptanceTests.APIs
                 Email = "abasi.maisam@gmail.com"
             };
         }
+
+        // private ContactPerson CreateInvalidContactPerson()
+        // {
+        //     return new ContactPerson {
+        //         FirstName = "meysam",
+        //         LastName = "abasi"
+        //     };
+        // }
     }
 }
