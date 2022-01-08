@@ -26,6 +26,16 @@ namespace Alerting.AcceptanceTests.APIs
             response.Should().BeGreaterThan(0);
         }
 
+        [Fact]
+        public async Task Prevent_creating_invalid_contact_person()
+        {
+            var contactPerson = CreateContactPerson();
+
+            var response = await _alertingApiClient.PostContactPersonAsync(contactPerson);
+
+            response.Should().BeGreaterThan(0);
+        }
+
         private ContactPerson CreateContactPerson()
         {
             return new ContactPerson {

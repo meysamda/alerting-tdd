@@ -1,3 +1,4 @@
+using Alerting.Presentation;
 using Microsoft.AspNetCore.Mvc.Testing;
 using RESTFulSense.Clients;
 
