@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Alerting.Infrastructure.Data.DbContexts
 {
-    public class AlertingDbContext : DbContext
+    public class AlertingDbContext : DbContext, IUnitOfWork
     {
         public DbSet<ContactPerson> ContactPersons { get; set; }
 
