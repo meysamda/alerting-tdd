@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Alerting.Infrastructure.Data.DbContexts;
 using Alerting.Infrastructure.Data.DbContexts.Entities;

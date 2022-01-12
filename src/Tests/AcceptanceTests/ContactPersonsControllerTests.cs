@@ -5,23 +5,23 @@ using Alerting.Tests.AcceptanceTests.Models;
 using FluentAssertions;
 using Xunit;
 
-namespace Alerting.Tests.AcceptanceTests.APIs
+namespace Alerting.Tests.AcceptanceTests
 {
-    public class ContactPersonAPIs
+    public class ContactPersonsControllerTests : IClassFixture<AlertingApiClientFixture>
     {
-        private readonly AlertingApiClient _alertingApiClient;
+        private readonly AlertingApiClientFixture _alertingApiClientFixture;
 
-        public ContactPersonAPIs(AlertingApiClient alertingApiClient)
+        public ContactPersonsControllerTests(AlertingApiClientFixture alertingApiClientFixture)
         {
-            _alertingApiClient = alertingApiClient;
+            _alertingApiClientFixture = alertingApiClientFixture;
         }
 
         [Fact]
-        public async Task Post_vaild_contact_person()
+        public async Task Authorized_user_posts_valid_contact_person()
         {
             var contactPerson = CreateValidContactPerson();
 
-            var response = await _alertingApiClient.PostContactPersonAsync(contactPerson);
+            var response = await _alertingApiClientFixture.PostContactPersonAsync(contactPerson, false);
 
             response.Should().BeGreaterThan(0);
         }

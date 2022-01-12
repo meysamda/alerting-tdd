@@ -1,12 +1,10 @@
-using System;
-using Alerting.Application.Services;
 using Alerting.Infrastructure.Data.DbContexts.Entities;
 using Alerting.Infrastructure.Data.Repositories;
 using Alerting.Tests.IntegrationTests.Helpers;
 using FluentAssertions;
 using Xunit;
 
-namespace Alerting.Tests.IntegrationTests.ContactPersonServiceTests
+namespace Alerting.Tests.IntegrationTests
 {
     [Collection("No Parallel")]
     public partial class ContactPersonServiceTests : IClassFixture<AlertingDbContextFixture>
@@ -19,7 +17,7 @@ namespace Alerting.Tests.IntegrationTests.ContactPersonServiceTests
         }
 
         [Fact]
-        public void Create_valid_contact_person()
+        public void Create_contact_person()
         {
             // arrange
             using (var context = _dbFixture.GetDbContext())
@@ -32,7 +30,7 @@ namespace Alerting.Tests.IntegrationTests.ContactPersonServiceTests
             using (var context = _dbFixture.GetDbContext())
             {
                 var repository = new ContactPersonRepository(context);
-                var sut = new ContactPersonService(repository);
+                var sut = new Application.Services.ContactPersonService(repository);
 
                 // act
                 id = sut.CreateContactPerson(contactPerson);
