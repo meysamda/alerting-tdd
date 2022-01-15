@@ -9,6 +9,7 @@ namespace Alerting.Presentation.MappingProfiles
         public ContactPersonProfile()
         {
             CreateMap<CreateContactPersonCommand, ContactPerson>();
+            CreateMap<UpdateContactPersonCommand, ContactPerson>();
         }
     }
 }

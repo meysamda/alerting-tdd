@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Alerting.Tests.AcceptanceTests.Models
+namespace Alerting.Presentation.ErrorHandling
 {
     public abstract class ErrorResponse
     {

@@ -1,15 +1,16 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Reflection;
 using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Alerting.Presentation.Init
+namespace Alerting.Tests.IntegrationTests.Helpers
 {
-    public static class AutoMapper
+    public class AutoMapperFixture
     {
-        public static void AddAutoMapper(this IServiceCollection services)
+        private readonly MapperConfiguration _mapperConfiguration;
+
+        public AutoMapperFixture()
         {
-            var assemblyNames = new string[] { "Presentation", "Application" };
+            var assemblyNames = new string[] { "Application" };
             var assemblies = assemblyNames.Select(o => Assembly.Load(o)).ToArray();
 
             var profiles = assemblies
@@ -17,17 +18,16 @@ namespace Alerting.Presentation.Init
                 .Where(t => typeof(Profile).GetTypeInfo().IsAssignableFrom(t.GetTypeInfo()))
                 .Where(t => !t.GetTypeInfo().IsAbstract);
 
-            var mapperConfig = new MapperConfiguration(mc =>
+            _mapperConfiguration = new MapperConfiguration(mc =>
             {
                 foreach (var profile in profiles)
                 {
                     mc.AddProfile(profile);
                 }
             });
-
-            IMapper mapper = mapperConfig.CreateMapper();
-
-            services.AddSingleton(mapper);
         }
+
+        public IMapper GetMapper() => _mapperConfiguration.CreateMapper();
+        
     }
 }

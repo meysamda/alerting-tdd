@@ -1,20 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Alerting.Application.Services;
+using Alerting.Application.ContactPersons;
 using Alerting.Infrastructure.Data.DbContexts;
 using Alerting.Infrastructure.Data.Repositories;
+using Alerting.Presentation.ErrorHandling;
 using Alerting.Presentation.Init;
+using Alerting.Presentation.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Alerting.Presentation
 {
@@ -52,11 +46,15 @@ namespace Alerting.Presentation
 
             services.AddScoped<ContactPersonService>();
             services.AddScoped<ContactPersonRepository>();
+
+            services.AddCustomizedSwagger(Configuration);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCustomizedExceptionHandler();
+            app.UseSwaggerAndSwaggerUI(Configuration);
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
