@@ -1,4 +1,4 @@
-namespace Alerting.Application.Common.Filters
+namespace Alerting.Infrastructure.Data.Repositories
 {
     public interface IPagableFilter : IFilter
     {

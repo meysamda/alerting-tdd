@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Configuration;
 
-namespace Alerting.Tests.IntegrationTests.Helpers
+namespace Alerting.Tests.IntegrationTests.Common
 {
     public static class TestConfigurationBuilder
     {

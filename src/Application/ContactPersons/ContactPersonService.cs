@@ -1,8 +1,10 @@
 using Alerting.Application.Common.DomainExceptions;
 using Alerting.Infrastructure.Data.DbContexts.Entities;
-using Alerting.Infrastructure.Data.Repositories;
+using Alerting.Infrastructure.Data.Repositories.ContactPersons;
 using AutoMapper;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alerting.Application.ContactPersons
 {
@@ -15,6 +17,18 @@ namespace Alerting.Application.ContactPersons
         {
             _repository = repository;
             _mapper = mapper;
+        }
+
+        public int GetContactPersonsCount(ContactPersonsFilter filter)
+        {
+            return _repository.GetContactPersonsCount(filter);
+        }
+
+        public IEnumerable<ContactPersonListItem> GetContactPersons(ContactPersonsPagableFilter filter)
+        {
+            var entities = _repository.GetContactPersons(filter);
+            var result = entities.Select(o => _mapper.Map<ContactPersonListItem>(o));
+            return result;
         }
 
         public ContactPerson CreateContactPerson(ContactPerson contactPerson)

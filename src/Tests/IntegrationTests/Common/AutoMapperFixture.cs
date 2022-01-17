@@ -2,7 +2,7 @@ using System.Linq;
 using System.Reflection;
 using AutoMapper;
 
-namespace Alerting.Tests.IntegrationTests.Helpers
+namespace Alerting.Tests.IntegrationTests.Common
 {
     public class AutoMapperFixture
     {

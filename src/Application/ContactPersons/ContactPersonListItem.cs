@@ -1,4 +1,4 @@
-namespace Alerting.Tests.AcceptanceTests.ContactPersons
+namespace Alerting.Application.ContactPersons
 {
     public class ContactPersonListItem
     {

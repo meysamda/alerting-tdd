@@ -9,6 +9,8 @@ namespace Alerting.Application.ContactPersons
         {
             CreateMap<ContactPerson, ContactPerson>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
+            
+            CreateMap<ContactPerson, ContactPersonListItem>();
         }
     }
 }

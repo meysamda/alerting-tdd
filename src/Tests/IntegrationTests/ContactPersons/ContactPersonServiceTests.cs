@@ -1,12 +1,14 @@
 using Alerting.Application.ContactPersons;
 using Alerting.Infrastructure.Data.DbContexts.Entities;
-using Alerting.Infrastructure.Data.Repositories;
-using Alerting.Tests.IntegrationTests.Helpers;
+using Alerting.Infrastructure.Data.Repositories.ContactPersons;
+using Alerting.Tests.IntegrationTests.Common;
 using AutoMapper;
 using FluentAssertions;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
-namespace Alerting.Tests.IntegrationTests
+namespace Alerting.Tests.IntegrationTests.ContactPersons
 {
     [Collection("No Parallel")]
     public partial class ContactPersonServiceTests : IClassFixture<AlertingDbContextFixture>, IClassFixture<AutoMapperFixture>
@@ -18,6 +20,77 @@ namespace Alerting.Tests.IntegrationTests
         {
             _dbFixture = dbFixture;
             _mapper = mapperFixture.GetMapper();
+        }
+
+        [Theory]
+        [InlineData("meysam", "", 5)]
+        [InlineData("", "abasi", 5)]
+        [InlineData("", "", 5)]
+        [InlineData("something", "", 0)]
+        public void Get_contact_persons_count(string fname, string lname, int expectedCount)
+        {
+            // arrange
+            using (var context = _dbFixture.GetDbContext())
+            {
+                context.ClearData();
+
+                var repository = new ContactPersonRepository(context);
+                var service = new ContactPersonService(repository, _mapper);
+                for (int i = 0; i < 5; i++)
+                {
+                    var contactPerson = CreateContactPerson("meysam", "abasi", "09126143808", "abasi.maisam@gmail.com");
+                    service.CreateContactPerson(contactPerson);
+                }
+            }
+
+            int actualCount;
+            using (var context = _dbFixture.GetDbContext())
+            {
+                var filter = new ContactPersonsFilter { FirstName = fname, LastName = lname };
+                var repository = new ContactPersonRepository(context);
+                var sut = new ContactPersonService(repository, _mapper);
+
+                // act
+                actualCount = sut.GetContactPersonsCount(filter);
+            }
+
+            // assert
+            actualCount.Should().Be(expectedCount);
+        }
+
+        [Theory]
+        [InlineData("meysam", "", 3, 2, 2)]
+        [InlineData("", "abasi", 2, 3, 3)]
+        [InlineData("", "", 3, 3, 2)]
+        [InlineData("something", "", 0, 5, 0)]
+        public void Get_contact_persons(string fname, string lname, int skip, int limit, int expectedCount)
+        {
+            // arrange
+            using (var context = _dbFixture.GetDbContext())
+            {
+                context.ClearData();
+
+                var repository = new ContactPersonRepository(context);
+                var service = new ContactPersonService(repository, _mapper);
+                for (int i = 0; i < 5; i++)
+                {
+                    var contactPerson = CreateContactPerson("meysam", "abasi", "09126143808", "abasi.maisam@gmail.com");
+                    service.CreateContactPerson(contactPerson);
+                }
+            }
+
+            IEnumerable<ContactPersonListItem> contactPersons;
+            using (var context = _dbFixture.GetDbContext())
+            {
+                var filter = new ContactPersonsPagableFilter { FirstName = fname, LastName = lname, Skip = skip, Limit = limit };
+                var repository = new ContactPersonRepository(context);
+                var sut = new ContactPersonService(repository, _mapper);
+
+                // act
+                contactPersons = sut.GetContactPersons(filter).ToArray();
+            }
+
+            contactPersons.Count().Should().Be(expectedCount);
         }
 
         [Fact]

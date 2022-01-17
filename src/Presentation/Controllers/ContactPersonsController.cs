@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alerting.Application.ContactPersons;
 using Alerting.Infrastructure.Data.DbContexts.Entities;
+using Alerting.Infrastructure.Data.Repositories.ContactPersons;
 using Alerting.Presentation.Attributes;
 using Alerting.Presentation.Commands;
 using AutoMapper;
@@ -20,6 +22,36 @@ namespace Presentation.Controllers
         {
             _service = service;
             _mapper = mapper;
+        }
+
+        /// <summary>
+        /// get contact persons count
+        /// </summary>
+        /// <param name="filter"></param>
+        [Auth("AlertingAdmin")]
+        [HttpGet("count")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public ActionResult<int> GetContactPersonsCount([FromQuery] ContactPersonsFilter filter)
+        {
+            var result = _service.GetContactPersonsCount(filter);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// get contact persons
+        /// </summary>
+        /// <param name="filter"></param>
+        [Auth("AlertingAdmin")]
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public ActionResult<IEnumerable<ContactPersonListItem>> GetContactPersons([FromQuery] ContactPersonsPagableFilter filter)
+        {
+            var result = _service.GetContactPersons(filter);
+            return Ok(result);
         }
 
         /// <summary>

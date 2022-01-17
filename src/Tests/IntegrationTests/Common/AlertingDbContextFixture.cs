@@ -3,7 +3,7 @@ using Alerting.Infrastructure.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace Alerting.Tests.IntegrationTests.Helpers
+namespace Alerting.Tests.IntegrationTests.Common
 {
     public class AlertingDbContextFixture
     {
