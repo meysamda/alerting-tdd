@@ -29,7 +29,7 @@ spec:
       nodeSelector:
         nodetype: worker
       imagePullSecrets:
-      - name: sedna-secret
+      - name: tech1a-secret
 --- 
 apiVersion: v1
 kind: Service
