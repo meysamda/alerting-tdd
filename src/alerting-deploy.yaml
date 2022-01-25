@@ -56,11 +56,11 @@ metadata:
 spec:
   tls:
   - hosts:
-      - nsedna.com
-    secretName: nsedna-tls
+      - tech1a.co
+    secretName: tech1a-tls
 
   rules:
-    - host: alerting.nsedna.com
+    - host: alerting.tech1a.co
       http:
         paths:
           - path: /swagger(/|$)(.*)
